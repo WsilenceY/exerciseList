@@ -10,3 +10,11 @@ function objectFactory() {
     Constructor.apply(obj, arguments);
     return newobj;
 };
+
+function newtwo(){
+    let nobj = new Object();
+    let Con = [].slice.apply(arguments);
+    nobj._proto_ = Con.prototype;
+    Con.apply(nobj.arguments)
+    return nobj;
+}

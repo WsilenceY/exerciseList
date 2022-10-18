@@ -5,24 +5,72 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>exercise list</title>
-    <script src="./newObj.js"></script>
-    <script src="./myPromise.js"></script>
-    <script>
-        // function Cat (name){
-        //     this.name = name; 
-        // }
-        // objectFactory(Cat)
-        const pp = new MyPromise((resolve)=>{
-            console.log('---11111---');
-            resolve({name:111});
-        }).then(()=>{
 
-        },()=>{
-            
-        })
+    <script src="./dist/bundle.js"></script>
+    <!-- <script src="./list/myPromise.js"></script>
+    <script src="./list/deepClone.ts"></script>
+    <script src="./list/flat.js"></script> --> -->
+    <script>
+        const ft = [1,[2,4],,[5,6,,[7]]];
+        const {
+            diff
+        } = myex;
+        const { el,difftree, patch } = diff;
+        const f = myex.flat(ft);
+        // const fr =flatReduce(ft)
+        const tree = el('div',{'id': "root"},[
+            el('h1',{'style':"color: blue"},['大标题']),
+            el('ul',{'style':"color: blue"},[
+                el('li',{'style':"color: blue"},['li1']),
+                el('li',{'style':"color: blue"},['li2']),
+                el('li',{},['li3'])
+            ])
+        ]);
+        const newTree = 
+        el('div',{'id': "root1"},[
+            el('h1',{'style':"color: red"},['大标题111'],),
+            el('ul',{'style':"color: red"},[
+                el('li',{'style':"color: red"},['li1']),
+                el('li',{'style':"color: red"},['li2']),
+                el('li',{},['li2']),
+                el('li',{},['li3']),
+                el('li',{},['li4']),
+                el('li',{},['li5']),
+            ]),
+            el('h2',{'style':"color: yellow"},['二标题1']),
+        ]);       
+        let rdom = tree.render();
+        document.body.appendChild(rdom);
+        const patchs = difftree(tree, newTree);
+        patch(rdom,patchs)
+        rdom = newTree;
     </script>
+    <style>
+        .item1{
+            width: 100px;
+            height: 100px;
+            background-color: #ff1300;
+            margin: 10px;
+            padding: 0;
+        }
+        .item2{
+            width: 100px;
+            height: 100px;
+            background-color: #ff1300;
+            margin: 30px;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
-    
+    <div>
+        <div class="item1"></div>
+        <div class="item2"></div>
+    </div>
+    <div>
+        <div style="height: 100px;width: 100px;float: left;background: lightblue">我是一个左浮动的元素</div>
+        <div style="width: 200px; height: 200px;background: #eee;overflow: hidden;">我是一个没有设置浮动, 
+             也没有触发 BFC 元素, width: 200px; height:200px; background: #eee;</div>
+        </div>
 </body>
 </html>
